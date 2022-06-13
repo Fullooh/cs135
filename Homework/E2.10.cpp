@@ -11,9 +11,9 @@ using namespace std;
 int main()
 {
 
-    int gallons = 0;
-    int fuel = 0;
-    int price = 0;
+    float gallons = 0;
+    float fuel = 0;
+    float price = 0;
 
     cout << "Enter number of gallons in tank: ";
     cin >> gallons;
