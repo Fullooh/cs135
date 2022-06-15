@@ -17,7 +17,11 @@ if (fin.fail()) {
 string junk;        // new string variable
 getline(fin, junk); // read one line from the file
 
-double date, eastSt, eastEl, westSt, westEl;
+string date, input_date;
+double eastSt, eastEl, westSt, westEl;
+
+cout << "Enter Date: ";
+cin >> input_date;
 
 while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) { 
     // this loop reads the file line-by-line
@@ -26,8 +30,10 @@ while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) {
     fin.ignore(INT_MAX, '\n'); //skips to the end of line, 
                           //ignorring the remaining columns 
  
-    // for example, to print the date and East basin storage:
-    cout << date << " " << eastSt << endl;
+    // OUR CODE GOES HERE
+    if (input_date == date){
+    cout << "East basin storage: " << eastSt << " billion gallons" << endl;
+    }
 }
 
 fin.close();
