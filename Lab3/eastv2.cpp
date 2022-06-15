@@ -17,7 +17,8 @@ if (fin.fail()) {
 string junk;        // new string variable
 getline(fin, junk); // read one line from the file
 
-string date, input;
+string date, input; // IF WE TAKE AWAY INPUT THEN THE CODE DOESNT SINGLE OUT SPECIFIC DATES.
+                    // "date" IS HOLDING ALL THE FILES WHILE INPUT IS SINGLING OUT EACH ONE, going to ask for more clarification.
 double eastSt, eastEl, westSt, westEl;
 
 cout << "Enter Date: ";
