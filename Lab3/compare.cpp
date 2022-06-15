@@ -1,3 +1,13 @@
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -17,9 +27,15 @@ if (fin.fail()) {
 string junk;        // new string variable
 getline(fin, junk); // read one line from the file
 
-string date;
+string date, starting, end;
 double eastSt, eastEl, westSt, westEl;
 
+
+cout << "Enter starting date: ";
+cin >> starting;
+
+cout << "Enter ending date: ";
+cin >> end;
 
 while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) { 
     // this loop reads the file line-by-line
@@ -29,7 +45,17 @@ while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) {
                           //ignorring the remaining columns 
  
     // OUR CODE GOES HERE
-    
+    if (starting <= date && date <= end){
+        if (eastEl > westEl){
+            cout << date << " East" << endl;
+        }
+        else if (eastSt < westEl){
+            cout << date << " West" << endl;
+        }
+        else{
+            cout << date << " Equal" << endl;
+        }
+    }
 }
 
 fin.close();
