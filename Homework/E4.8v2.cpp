@@ -14,13 +14,15 @@ using namespace std;
 
 int main()
 {
-    char word;
+    char word[10];
+    char x = '\n';
 
     cout << "Enter word: ";
-    cin >> word, '\n';
+    cin.get (word, 10, x);
 
-    for (int i = 0; i < word != '\0'; i++)
-    cout << word << endl;
+
+    for (int i = 0; i < word[i] != '\0'; i++)
+    cout << word[i] << endl;
     
 
 }
