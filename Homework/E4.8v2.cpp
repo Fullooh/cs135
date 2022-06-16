@@ -18,7 +18,7 @@ int main()
     char x = '\n';
 
     cout << "Enter word: ";
-    cin.get (word, 10, x);
+    cin.get (word, 10, 'i');
 
 
     for (int i = 0; i < word[i] != '\0'; i++)
