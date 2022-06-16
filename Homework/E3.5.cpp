@@ -11,10 +11,10 @@ int main()
 
 
 
-    if (num1 > num2 > num3){
-       cout << "Decreasing" << endl;
+    if (num1 > num2 && num1 > num3 && num2 > num3){
+       cout << "Output: Decreasing" << endl;
     }
-    else if (num1 < num2 < num3){
+    else if (num1 < num2 && num1 < num3 && num2 < num3){
         cout << "Output: Increasing" << endl;
     }
     else{
