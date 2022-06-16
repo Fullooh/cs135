@@ -48,7 +48,7 @@ while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) {
                           //ignorring the remaining columns 
  
     // OUR CODE GOES HERE
-    if (starting <= date && date <= end){
+    if (starting >= date && date <= end){
         date_arr[index] = date;
         westEl_arr[index] = westEl;
         index++;
