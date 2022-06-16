@@ -48,7 +48,7 @@ while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) {
                           //ignorring the remaining columns 
  
     // OUR CODE GOES HERE
-    if (starting >= date && date <= end){
+    if (starting <= date && date <= end){
         date_arr[index] = date;
         westEl_arr[index] = westEl;
         index++;
@@ -57,11 +57,11 @@ while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) {
     if (date > end){
         break;
     }
-
-    for (int i = index-1; i >= 0; i--){
-        cout << date_arr[i] << " " << westEl_arr[i] << endl;
-    }
 }
+for (int i = index-1; i >= 0; i--){
+    cout << date_arr[i] << " " << westEl_arr[i] << endl;
+    }
+
 
 fin.close();
 
