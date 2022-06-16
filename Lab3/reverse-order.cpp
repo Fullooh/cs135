@@ -30,6 +30,7 @@ getline(fin, junk); // read one line from the file
 string date, starting, end;
 double eastSt, eastEl, westSt, westEl;
 
+int index = 0;
 
 cout << "Enter earlier date: ";
 cin >> starting;
@@ -49,7 +50,13 @@ while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) {
  
     // OUR CODE GOES HERE
     if (starting <= date && date <= end){
-        
+        date_arr[index] = date;
+        westEl_arr[index] = westEl;
+        index++;
+    }
+
+    for (int i = index-1; i >= 0; i--){
+        cout << date_arr[i] << " " << westEl_arr[i] << endl;
     }
 }
 
