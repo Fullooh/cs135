@@ -30,8 +30,6 @@ getline(fin, junk); // read one line from the file
 string date, starting, end;
 double eastSt, eastEl, westSt, westEl;
 
-int index = 0;
-
 cout << "Enter earlier date: ";
 cin >> starting;
 
@@ -41,6 +39,7 @@ cin >> end;
 string date_arr[400]; // Year is 365 days 
 double westEl_arr[400];
 
+int index = 0;
 while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) { 
     // this loop reads the file line-by-line
     // extracting 5 values on each iteration 
@@ -53,6 +52,10 @@ while(fin >> date >> eastSt >> eastEl >> westSt >> westEl) {
         date_arr[index] = date;
         westEl_arr[index] = westEl;
         index++;
+    }
+
+    if (date > end){
+        break;
     }
 
     for (int i = index-1; i >= 0; i--){
