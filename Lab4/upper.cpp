@@ -14,7 +14,7 @@ using namespace std;
 int main()
 {  
     int j, i, size;
-    cout << "Input Size Length: ";
+    cout << "size:";
     cin >>  size;
     cout << "Shape:"  << endl;
 
@@ -22,8 +22,12 @@ int main()
     {
         for (j = 0; j < size; j++)
         {
-
-
+            if (i<=j){
+                cout << "*";
+            }
+            else {
+                cout << " ";}
         }
+         cout << endl;
     }
 }
