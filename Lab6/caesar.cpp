@@ -33,3 +33,28 @@ else
 }
 
 }
+
+string encryptCaaesar(string plaintext, int rshift)
+{
+    string output;
+
+    for (int i = 0; i < plaintext.length(); i++)
+    {
+        output = shiftChar (plaintext[i], rshift);
+    }
+    return output;
+}
+
+int main()
+{
+    int shift;
+    string input = "";
+   
+    cout << "Enter Plaintext: ";
+    getline(cin, input);
+
+    cout << "Enter Shift: ";
+    cin >> shift;
+
+    cout << "Ciphertext: " << encryptCaaesar(input, shift) << endl;
+}
