@@ -27,7 +27,7 @@ char result;
 
         else
         {
-            result += char((int (c) + rshift - 97) % 26 + 97);
+            result = char((int (c) + rshift - 97) % 26 + 97);
         }
 
     }
