@@ -1,10 +1,42 @@
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
+char shiftChar(char c, int rshift);
+
 string encryptVigenere(string plaintext, string keyword)
 {
+    string output = "";
+    int pos = 0;
+    int shift = 0;
+
+    for (int i = 0; i < plaintext.length(); i++)
+    {
+        if(pos == keyword.length())
+            pos = 0;
+
+        shift = int(keyword[pos]) - 97;
+        output += shiftChar (plaintext[i], shift );
+
+        if(isalpha(plaintext[i]))
+            pos++;
+    }
+    return output;
 
 
 }
@@ -41,14 +73,14 @@ char result;
 
 int main()
 {
-    int shift;
+    string keyword;
     string input = "";
    
     cout << "Enter Plaintext: ";
     getline(cin, input);
 
-    cout << "Enter Shift: ";
-    cin >> shift;
+    cout << "Enter Keyword: ";
+    cin >> keyword;
 
-    cout << "Ciphertext: " << encryptCaesar(input, shift) << endl;
+    cout << "Ciphertext: " << encryptVigenere(input, keyword) << endl;
 }
