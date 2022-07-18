@@ -1,19 +1,35 @@
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 #include <iostream>
 
 using namespace std;
 
-int main()
-{
-    int num1, num2;
-    char op;
+int main (){
+    int sum = 0, a;
+    char symbol = '+';
 
-    cout << "Enter First Integer: ";
-    cin >> num1;
+    while (cin >> a){
+        
 
-    cout << "Enter Operation: ";
-    cin >> op;
+        if(symbol == '+')
+            sum = sum + a;
+        if(symbol == '-')
+            sum = sum - a;
 
-    cout << "Enter Second Integer: ";
-    cin >> num2;
-
+        cin >> symbol;
+    }
+    cout << sum << endl;
 }
