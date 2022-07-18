@@ -16,31 +16,35 @@ using namespace std;
 
 char shiftChar(char c, int rshift)
 {
+char result;
 
+    if (isalpha(c))
+    {
+        if (isupper(c))
+        {
+            result = char((int (c) + rshift - 65) % 26 + 65);
+        }
 
-if ((int) c >= 65 && (int) c <= 90)
-{
-    toupper(c);
-    return c;
-}
-if ((int) c >= 97 && (int) c <= 122)
-{
-    return c;
-}
-else
-{
-    return c;
+        else
+        {
+            result += char((int (c) + rshift - 97) % 26 + 97);
+        }
+
+    }
+    else 
+    {
+        return c;
+    }
+    return result;
 }
 
-}
-
-string encryptCaaesar(string plaintext, int rshift)
+string encryptCaesar(string plaintext, int rshift)
 {
-    string output;
+    string output = "";
 
     for (int i = 0; i < plaintext.length(); i++)
     {
-        output = shiftChar (plaintext[i], rshift);
+        output += shiftChar (plaintext[i], rshift);
     }
     return output;
 }
@@ -56,5 +60,5 @@ int main()
     cout << "Enter Shift: ";
     cin >> shift;
 
-    cout << "Ciphertext: " << encryptCaaesar(input, shift) << endl;
+    cout << "Ciphertext: " << encryptCaesar(input, shift) << endl;
 }
