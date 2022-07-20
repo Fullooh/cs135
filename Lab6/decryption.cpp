@@ -30,13 +30,7 @@ string encryptCaesar(string plaintext, int rshift)
 {
     string output = "";
 
-    for (int i = 0; i < plaintext.length(); i++)
-    {
-        output += shiftChar (plaintext[i], rshift);
-    }
-    return output;
 }
-
 char shiftChar(char c, int rshift)
 {
 char result;
