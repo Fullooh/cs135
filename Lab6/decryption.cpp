@@ -36,6 +36,8 @@ string encryptCaesar(string plaintext, int rshift)
     }
     return output;
 }
+
+
 char shiftChar(char c, int rshift)
 {
 char result;
@@ -59,10 +61,6 @@ char result;
     }
     return result;
 }
-
-
-
-
 
 
 
