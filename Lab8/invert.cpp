@@ -1,12 +1,3 @@
-//
-//
-//
-//
-//
-//
-//
-//
-//
 #include <iostream>
 #include <cassert>
 #include <cstdlib>
@@ -53,6 +44,13 @@ void readImage(int image[MAX_H][MAX_W], int &height, int &width) {
 	return;
 }
 
+/*example header
+P2
+250 194
+255
+210 208 208 212 214 212 212 .....
+*/
+
 void writeImage(int image[MAX_H][MAX_W], int height, int width) {
 	ofstream ostr;
 	ostr.open("outImage.pgm");
@@ -80,6 +78,8 @@ void writeImage(int image[MAX_H][MAX_W], int height, int width) {
 	return;
 }
 
+
+
 // http://paulcuth.me.uk/netpbm-viewer/
 int main() {
 
@@ -97,16 +97,15 @@ int main() {
 	
 	
 	int out[MAX_H][MAX_W];
-	int largeh = h*2;
-	int largew = w*2;
 
-	for(int row = 0; row < largeh; row++) {
-		for(int col = 0; col < largew; col++) {
-			out[row][col] = img[row/2][col/2];
+	for(int row = 0; row < h; row++) {
+		for(int col = 0; col < w; col++) {
+			out[row][col] = 255 - img[row][col];
+
 		}
 	}
 
 	// and save this new image to file "outImage.pgm"
-	writeImage(out, largeh, largew);
+	writeImage(out, h, w);
 
 }

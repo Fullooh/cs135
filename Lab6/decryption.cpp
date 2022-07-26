@@ -1,79 +1,128 @@
 #include <iostream>
-#include <vector>
+#include <string>
 
 using namespace std;
 
-char shiftChar(char c, int rshift);
+///global index for Vigenere cipher
+int vigenereIndex = -1;
 
-string encryptVigenere(string plaintext, string keyword)
-{
-    string output = "";
-    int pos = 0;
-    int shift = 0;
-
-    for (int i = 0; i < plaintext.length(); i++)
-    {
-        if(pos == keyword.length())
-            pos = 0;
-
-        shift = int(keyword[pos]) - 97;
-        output += shiftChar (plaintext[i], shift );
-
-        if(isalpha(plaintext[i]))
-            pos++;
+int key(char a){                    //returns 0-25 for characters
+    int temp = (int)a;
+    if(temp >=97 && temp <= 122){
+        return temp - 97;
     }
-    return output;
-
-
+    else return -1;
 }
-string encryptCaesar(string plaintext, int rshift)
-{
-    string output = "";
-
-   for (int i = 0; i < plaintext.length(); i++)
-    {
-        output += shiftChar (plaintext[i], rshift);
-    }
-    return output;
+char fromkey(int x){                // returns character from 0-25
+    x+=26;
+    return (char)((x%26)+97);
 }
 
+int myhash(string codeword){
+    vigenereIndex++;
+    vigenereIndex%=codeword.length();
+    return key(codeword[vigenereIndex]);
+}
 
-char shiftChar(char c, int rshift)
-{
-char result;
+char shiftChar(char c, int rshift){
+    char temp = tolower(c);
+    int raw = ((int)temp - 97 + rshift);
+    raw += 26;
+    raw =  raw % 26;
+    raw += 97;
+    temp = (char)raw;
 
-    if (isalpha(c))
-    {
-        if (isupper(c))
-        {
-            result = char((int (c) + rshift - 65) % 26 + 65);
-        }
-
-        else
-        {
-            result = char((int (c) + rshift - 97) % 26 + 97);
-        }
-
+    if((int)c >= 65 && (int)c <= 90){ // uppercase letters
+        temp = toupper(temp);
+        return temp;
     }
-    else 
-    {
+
+    if((int)c >= 97 && (int)c <= 122){ // lowercase letters
+        return temp;
+    }
+    else{ //punctuation
         return c;
     }
-    return result;
+}
+
+string encryptCaesar(string plaintext, int rshift){
+    string output;
+    for(int i=0; i < plaintext.length(); i++){
+    output += shiftChar(plaintext[i], rshift);
+    }
+    return output;
+}
+
+string encryptVigenere(string plaintext, string keyword){
+    string output;
+    char tempchar;
+    bool plainCASE = true; // if true, this is a lower case character
+    vigenereIndex = -1; // reset for this Vigenere run
+    for(int j=0; j<plaintext.length(); j++){
+        tempchar = tolower(plaintext[j]);
+        plainCASE = (plaintext[j] == tempchar);
+
+        if((int)tempchar >= 97 && (int)tempchar <= 122){
+            if(plainCASE){
+                output += fromkey(myhash(keyword)+key(tempchar));            
+            }
+            else{
+                output += toupper(fromkey(myhash(keyword)+key(tempchar)));
+            }
+        }
+        else{
+            output += plaintext[j];
+        }
+    }
+    return output;
+}
+
+string decryptCaesar(string ciphertext, int rshift){    //negates caesar shift
+    return encryptCaesar(ciphertext, 0-rshift);
+}
+
+string decryptVigenere(string ciphertext, string keyword){ //Reverse implementation of Vigenere Cipher
+    string output;
+    char tempchar;
+    bool plainCASE = true; // if true, this is a lower case character
+    vigenereIndex = -1; // reset for this Vigenere run
+    for(int j=0; j<ciphertext.length(); j++){
+        // cout << ciphertext[j] << endl;
+        tempchar = tolower(ciphertext[j]);
+        plainCASE = (ciphertext[j] == tempchar);
+
+        if((int)tempchar >= 97 && (int)tempchar <= 122){
+            if(plainCASE){
+                output += fromkey(key(tempchar)-myhash(keyword));            
+            }
+            else{
+                output += toupper(fromkey(key(tempchar)-myhash(keyword)));
+            }
+        }
+        else output += ciphertext[j];
+    }
+    return output;
 }
 
 
-
-int main()
-{
-    string keyword;
+int main(){
     string input = "";
-   
+    int shift;
+    string saltword;
     cout << "Enter Plaintext: ";
     getline(cin, input);
+    cout << "= Caesar =\n Enter Shift    : ";
+    cin >> shift;
+    string caesarText = encryptCaesar(input, shift);
+    cout << "Ciphertext     : " << caesarText << endl;
+    cout << "Decrypted      : " << decryptCaesar(caesarText, shift) << endl << endl;
 
-    cout << "Enter Keyword: ";
-    cin >> keyword;
-
-    cout << "Ciphertext: " << encryptVigenere(input, keyword) << endl;
+    cout << "= Vigenere = \n Enter keyword  : ";
+    cin >> saltword;
+    string vigenereText = encryptVigenere(input, saltword);
+    cout << "Ciphertext     : " << vigenereText << endl;
+    cout << "Decrypted      : " << decryptVigenere(vigenereText, saltword) << endl;
+    
+    
+    return 0;
 }

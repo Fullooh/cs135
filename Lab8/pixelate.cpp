@@ -1,12 +1,3 @@
-//
-//
-//
-//
-//
-//
-//
-//
-//
 #include <iostream>
 #include <cassert>
 #include <cstdlib>
@@ -97,16 +88,22 @@ int main() {
 	
 	
 	int out[MAX_H][MAX_W];
-	int largeh = h*2;
-	int largew = w*2;
-
-	for(int row = 0; row < largeh; row++) {
-		for(int col = 0; col < largew; col++) {
-			out[row][col] = img[row/2][col/2];
+	int smallh = h/2;
+	int smallw = w/2;
+	int temp;
+	for(int row = 0; row < smallh; row++) {
+		for(int col = 0; col < smallw; col++) {
+			temp = img[row*2][col*2] + img[row*2+1][col*2] + img[row*2][col*2+1] + img[row*2+1][col*2+1];
+			temp /= 4;
+			out[row*2   ][col*2   ] = temp;
+			out[row*2   ][col*2 +1] = temp;
+			out[row*2 +1][col*2   ] = temp;
+			out[row*2 +1][col*2 +1] = temp;
+			
 		}
 	}
 
 	// and save this new image to file "outImage.pgm"
-	writeImage(out, largeh, largew);
+	writeImage(out, h, w);
 
 }
